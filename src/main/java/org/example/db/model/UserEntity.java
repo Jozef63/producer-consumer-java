@@ -11,6 +11,7 @@ public class UserEntity {
         this.id = id;
         this.guid = guid;
     }
+
     public String getName() {
         return name;
     }

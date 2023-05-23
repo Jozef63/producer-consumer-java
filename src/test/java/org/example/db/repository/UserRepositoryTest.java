@@ -26,12 +26,12 @@ public class UserRepositoryTest {
 
     @Test
     public void createSuccessTest() throws SQLException {
-        when(dbConnector.statement(any())).thenReturn(true);
+        when(dbConnector.executeStatement(any())).thenReturn(true);
         UserEntity userEntity = new UserEntity("name", 1, "guid");
         userRepository.create(new UserEntity("name", 1, "guid"));
         String expected = String.format("INSERT INTO SUSERS (USER_ID, USER_GUID, USER_NAME) " +
                 "VALUES (%s, '%s', '%s');", userEntity.getId(), userEntity.getGuid(), userEntity.getName());
-       verify(dbConnector, times(1)).statement(expected);
+       verify(dbConnector, times(1)).executeStatement(expected);
     }
 
 //                      . negative scenarios

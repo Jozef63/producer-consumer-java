@@ -18,6 +18,7 @@ public class GetAllUsersQueryResponse implements QueryResponse {
         return users;
     }
 
+    @Override
     public GetAllUsersQuery getInitialQuery() {
         return initialQuery;
     }

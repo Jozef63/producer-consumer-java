@@ -1,9 +1,10 @@
 package org.example.message.command;
 
-public class CreateUserCommand implements Command{
+public class CreateUserCommand implements Command {
     private final int id;
     private final String name;
     private final String guid;
+
     public CreateUserCommand(int id, String name, String guid) {
         this.id = id;
         this.name = name;

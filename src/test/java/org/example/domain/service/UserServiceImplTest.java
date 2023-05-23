@@ -1,20 +1,18 @@
 package org.example.domain.service;
 
 import org.assertj.core.api.Assertions;
-import org.example.db.model.UserEntity;
+import org.example.domain.model.User;
 import org.example.message.command.CreateUserCommand;
 import org.example.message.query.GetAllUsersQuery;
 import org.example.message.query.Query;
 import org.example.message.query.response.GetAllUsersQueryResponse;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.example.domain.model.User;
 import org.example.message.service.MessagingService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -26,9 +24,7 @@ import java.util.concurrent.TimeoutException;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-
 public class UserServiceImplTest {
-
 
     private UserService userService;
 
@@ -46,7 +42,7 @@ public class UserServiceImplTest {
     @Before
     public void init() {
         messagingService = mock();
-        user = new User("name", "guid",1);
+        user = new User("name", "guid", 1);
         this.userService = new UserServiceImpl(messagingService);
     }
 
@@ -71,8 +67,5 @@ public class UserServiceImplTest {
         Assertions.assertThat(queryCaptor.getValue()).isInstanceOf(GetAllUsersQuery.class);
         Assertions.assertThat(actual).usingRecursiveAssertion()
                 .isEqualTo(users);
-
     }
-
-
 }

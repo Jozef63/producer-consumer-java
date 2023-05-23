@@ -1,14 +1,16 @@
 package org.example.domain.service;
 
-import org.example.message.service.MessagingService;
 import org.example.domain.model.User;
 import org.example.message.command.CreateUserCommand;
 import org.example.message.command.DeleteAllUsersCommand;
 import org.example.message.query.GetAllUsersQuery;
 import org.example.message.query.response.GetAllUsersQueryResponse;
+import org.example.message.service.MessagingService;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class UserServiceImpl implements UserService {
 

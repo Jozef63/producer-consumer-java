@@ -2,9 +2,9 @@ package org.example.message.listener;
 
 import org.example.db.repository.UserRepository;
 import org.example.mapper.UserMapper;
-import org.example.queue.Producer;
 import org.example.message.query.GetAllUsersQuery;
 import org.example.message.query.response.GetAllUsersQueryResponse;
+import org.example.queue.Producer;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

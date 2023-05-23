@@ -4,6 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface JdbcConnector {
-    Boolean statement(String sql) throws SQLException;
-    ResultSet query(String sql) throws SQLException;
+    Boolean executeStatement(String sql) throws SQLException;
+    ResultSet fetchQuery(String sql) throws SQLException;
 }

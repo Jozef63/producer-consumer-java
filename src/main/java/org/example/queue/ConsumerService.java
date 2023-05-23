@@ -11,7 +11,7 @@ public class ConsumerService {
     private final Consumer consumer;
     private volatile boolean shouldRun = false;
     private Message message;
-    private PropertyChangeSupport queueSupport;
+    private final PropertyChangeSupport queueSupport;
 
     public ConsumerService(Consumer consumer) {
         this.consumer = consumer;
@@ -23,11 +23,6 @@ public class ConsumerService {
         Executors.defaultThreadFactory().newThread(() -> {
             while (shouldRun) {
                 processMessage(consumer.consumeNewMessages());
-                try {
-                    Thread.sleep(200L);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
             }
         }).start();
         System.out.println("Starting consumer.");

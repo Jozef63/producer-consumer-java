@@ -8,18 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements Repository<UserEntity>{
+public class UserRepository implements Repository<UserEntity> {
 
     private final JdbcConnector dbConnector;
-    public UserRepository (JdbcConnector dbConnector) {
+
+    public UserRepository(JdbcConnector dbConnector) {
         this.dbConnector = dbConnector;
     }
+
     @Override
     public UserEntity create(UserEntity userEntity) {
         String createSqlStatement = String.format("INSERT INTO SUSERS (USER_ID, USER_GUID, USER_NAME) " +
                 "VALUES (%s, '%s', '%s');", userEntity.getId(), userEntity.getGuid(), userEntity.getName());
         try {
-            if (dbConnector.statement(createSqlStatement)) {
+            if (dbConnector.executeStatement(createSqlStatement)) {
                 return userEntity;
             } else {
                 return null;
@@ -37,11 +39,11 @@ public class UserRepository implements Repository<UserEntity>{
         List<UserEntity> result = new ArrayList<>();
         ResultSet resultSet = null;
         try {
-            resultSet = dbConnector.query(querySqlStatement);
+            resultSet = dbConnector.fetchQuery(querySqlStatement);
             while (resultSet.next()) {
                 UserEntity userEntity = new UserEntity(resultSet.getString("USER_NAME"),
                         resultSet.getInt("USER_ID"), resultSet.getString("USER_GUID"));
-               result.add(userEntity);
+                result.add(userEntity);
             }
         } catch (SQLException sqlException) {
             System.err.printf("Getting users with query %s threw following exception %s!%n",
@@ -62,7 +64,7 @@ public class UserRepository implements Repository<UserEntity>{
     public Boolean deleteAll() {
         String deleteSqlStatement = "DELETE FROM SUSERS;";
         try {
-            return dbConnector.statement(deleteSqlStatement);
+            return dbConnector.executeStatement(deleteSqlStatement);
         } catch (SQLException sqlException) {
             System.err.printf("Deleting all users with statement %s threw following exception %s!%n",
                     deleteSqlStatement, sqlException);
